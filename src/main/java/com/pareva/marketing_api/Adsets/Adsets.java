@@ -54,7 +54,7 @@ public class Adsets {
 
 
                         }
-                            @RequestMapping("/get/{id}")
+                            @RequestMapping("")
                                 public CustomResponse reteriveAdsets(@PathVariable String id)
                                 {
                                     CustomResponse customResponse=new CustomResponse();
@@ -62,7 +62,7 @@ public class Adsets {
                                     try {
 
                                         customResponse.setStatus(200);
-                                        customResponse.setBody(adSet.getId());
+                                        customResponse.setBody("suceedd");
                                         return customResponse;
 
                                     } catch (Exception e) {
