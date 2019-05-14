@@ -58,7 +58,7 @@ public class AdCreatives {
                         .addUploadFile(name, new File(imagePath))
                         .execute();
                 customResponse.setStatus(200);
-                customResponse.setBody("suceedd");
+                customResponse.setBody("suceed");
                 return customResponse;
 
             } catch (Exception e) {
