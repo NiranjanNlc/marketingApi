@@ -63,7 +63,7 @@ public class AdCreatives {
 
             } catch (Exception e) {
                 customResponse.setStatus(200);
-                customResponse.setBody("error encountered ");
+                customResponse.setBody("err0r encountered ");
                 customResponse.setError(e.toString());
                 return customResponse;
 
