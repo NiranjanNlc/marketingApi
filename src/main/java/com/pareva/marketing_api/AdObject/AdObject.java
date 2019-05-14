@@ -3,21 +3,18 @@ package com.pareva.marketing_api.AdObject;
 
 import com.facebook.ads.sdk.*;
 import com.pareva.marketing_api.CustomResponse.CustomResponse;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import static com.pareva.marketing_api.AppProperty.Values.*;
 
 
 @RestController
-@RequestMapping("adobject")
+@RequestMapping("/adobject/")
 
 public class AdObject {
 
-    @RequestMapping("/archieve/{adid}")
-    public CustomResponse archive(@PathVariable String adId)
+    @RequestMapping("/archieve")
+    public CustomResponse archive(@RequestParam(name="adid",defaultValue = "23843632368460426") String adId)
     {
         CustomResponse customResponse = new CustomResponse();
         try {
@@ -36,8 +33,8 @@ public class AdObject {
 
 
     }
-    @RequestMapping("/delete/{adid}")
-    public CustomResponse  delete( @PathVariable String adId)
+    @RequestMapping("/delete")
+    public CustomResponse  delete(@RequestParam(name="adid",defaultValue = "23843632368460426") String adId)
     {  CustomResponse customResponse = new CustomResponse();
         try {
             new Ad(adId, context).update()
@@ -47,15 +44,14 @@ public class AdObject {
             customResponse.setBody("Deleted ");
             return customResponse;
         } catch (APIException e) {
-            e.printStackTrace();
             customResponse.setStatus(500);
             customResponse.setMessage(e.toString());
             return customResponse;
 
         }
     }
-    @RequestMapping("/reterive/{campagainId}")
-    public CustomResponse  reterive( @PathVariable String cid)
+    @RequestMapping("/reterive")
+    public CustomResponse  reterive( @RequestParam(name="cid",defaultValue ="23843661855790426") String cid)
     {
         CustomResponse customResponse = new CustomResponse();
         try {
@@ -65,7 +61,8 @@ public class AdObject {
 
             customResponse.setStatus(200);
             customResponse.setBody("reterived .." +
-                    "show also the results ");
+                    "show also the results .." +
+                    "sabbai ad aaunay garri loop chalau  ");
 
             return customResponse;
         } catch (APIException e) {

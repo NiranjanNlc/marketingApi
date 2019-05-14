@@ -13,13 +13,13 @@ import java.io.File;
 import static com.pareva.marketing_api.AppProperty.Values.*;
 
 @RestController
-@RequestMapping("/adcreatives/")
+@RequestMapping("/adcreatives")
 public class AdCreatives {
 
-    @RequestMapping("/create/")
+    @RequestMapping("/create")
     public CustomResponse reteriveAdsets(@RequestParam(value= "name" ,defaultValue="myadset",required = true) String name ,
                                          @RequestParam (value= "pageID",required = true ) String pageID,
-                                         @RequestParam  (value= "imagehash"  ) String imagehash) {
+                                         @RequestParam  (value= "imagehash" ,required=false ) String imagehash) {
         CustomResponse customResponse = new CustomResponse();
 
         try {
@@ -42,11 +42,12 @@ public class AdCreatives {
         } catch (Exception e) {
             customResponse.setStatus(200);
             customResponse.setBody("error encountered ");
+            customResponse.setError(e.toString());
             return customResponse;
 
         }
     }
-        @RequestMapping("/addimage/")
+        @RequestMapping("/addimage")
         public CustomResponse addImageForCreatives(@RequestParam(value= "name" ,required = true) String name ,
                                                    @RequestParam (value= "image",required = true ) String imagePath )
         {
@@ -63,11 +64,10 @@ public class AdCreatives {
             } catch (Exception e) {
                 customResponse.setStatus(200);
                 customResponse.setBody("error encountered ");
+                customResponse.setError(e.toString());
                 return customResponse;
 
             }
-
-
-        }
+            }
 
 }

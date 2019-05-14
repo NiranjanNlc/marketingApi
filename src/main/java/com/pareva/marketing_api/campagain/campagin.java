@@ -1,10 +1,7 @@
 package com.pareva.marketing_api.campagain;
 
 import com.pareva.marketing_api.CustomResponse.CustomResponse;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import com.facebook.ads.sdk.*;
 import static com.pareva.marketing_api.AppProperty.Values.*;
 
@@ -51,6 +48,7 @@ public class campagin {
 
             customResponse.setStatus(200);
             customResponse.setBody("Created");
+            customResponse.setMessage("Field id="+campaign.getFieldId());
             return customResponse;
 
         } catch (APIException e) {
@@ -62,7 +60,7 @@ public class campagin {
         }
     }
     @RequestMapping("/read/{cid}")
-    public CustomResponse getCampagainObject(@PathVariable String cid)
+    public CustomResponse getCampagainObject(@PathVariable String cid )
     {   CustomResponse customResponse=new CustomResponse();
         try {
             Campaign campaign = Campaign.fetchById(cid, context);
@@ -77,25 +75,26 @@ public class campagin {
         } catch (APIException e) {
 
             customResponse.setStatus(500);
+            customResponse.setBody(e.toString());
             customResponse.setMessage(e.toString());
 
             return customResponse;
 
         }
     }
-    @RequestMapping("/update/{id}")
-    public CustomResponse update(@PathVariable String id)   {
+    @RequestMapping("/update")
+    public CustomResponse update(@RequestParam(name="id") String id,@RequestParam(name="name") String name)   {
         Campaign campaign = null;
         CustomResponse customResponse=new CustomResponse();
         try {
             campaign = Campaign.fetchById(id, context);
             campaign.update()
-                    .setName("Updated Java SDK Test Campaign") // set parameter for the API call
+                    .setName(name) // set parameter for the API call
                     .execute();
             System.out.println(campaign.fetch());
 
             customResponse.setStatus(200);
-            customResponse.setBody("Updated ");
+            customResponse.setBody("Updated to "+name);
             return customResponse;
         } catch (APIException e) {
 
@@ -104,7 +103,7 @@ public class campagin {
             e.printStackTrace();
         }
 
-        return null;
+        return customResponse;
     }
     @RequestMapping("/delete/{id}")
     public CustomResponse delete (@PathVariable String id)

@@ -1,11 +1,15 @@
 package com.pareva.marketing_api.CustomResponse;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class CustomResponse<T> {
     private Integer status;
+
     private T body;
+
     private String message;
+
     private String error;
 
     public Integer getStatus() {

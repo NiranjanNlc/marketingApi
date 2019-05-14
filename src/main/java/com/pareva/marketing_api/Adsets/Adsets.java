@@ -54,7 +54,7 @@ public class Adsets {
 
 
                         }
-                            @RequestMapping("")
+                            @RequestMapping("/retrive/")
                                 public CustomResponse reteriveAdsets(@PathVariable String id)
                                 {
                                     CustomResponse customResponse=new CustomResponse();
